@@ -9,6 +9,7 @@ import { ContactView } from './views/ContactView';
 import { EnquiryDrawer } from './components/EnquiryDrawer';
 import { SeoInspectModal } from './components/SeoInspectModal';
 import { SettingsModal } from './components/SettingsModal';
+import { InteractiveMascotBuddy } from './components/InteractiveMascotBuddy';
 
 const DEFAULT_STORE_CONFIG: StoreConfig = {
   brandName: 'Sakshi Pradip Papad',

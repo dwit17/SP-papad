@@ -3,11 +3,11 @@
 @layer base {
   :root {
     --font-sans: 'Poppins', 'Noto Sans Gujarati', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --bg-canvas: #FAF7F2;
+    --bg-canvas: #FFFDF9;
     --surface: #FFFFFF;
-    --surface-subtle: #F5EFEB;
-    --border-subtle: #E7DFD5;
-    --border-strong: #D6C7B7;
+    --surface-subtle: #FDF6E9;
+    --border-subtle: #E8DEC8;
+    --border-strong: #292524;
     --text-heading: #1C1917;
     --text-body: #44403C;
     --text-muted: #78716C;
@@ -32,47 +32,244 @@
     background-color: var(--bg-canvas);
     color: var(--text-body);
     overflow-x: hidden;
+    /* Playful subtle background pattern with tiny spice dots and sunshine sparkles */
+    background-image: 
+      radial-gradient(#F59E0B 0.75px, transparent 0.75px),
+      radial-gradient(#D97706 0.75px, #FFFDF9 0.75px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
   }
 
-  /* Specific typography line-height adaptations for Gujarati and Devanagari */
   :lang(gu), :lang(hi) {
     line-height: 1.7;
   }
 }
 
-/* 1 Viewport Rule for Desktop Sections as requested in PRD Section 3.1:
-   "Every section is exactly one viewport tall (min-height: 100svh). Desktop/tablet: content fits inside viewport.
-    Mobile: section grows taller if needed. Never clip or cut-off content." */
+/* 1 Viewport Rule for Desktop Sections */
 .section-viewport {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding-top: 5rem;
-  padding-bottom: 3rem;
+  padding-top: 5.5rem;
+  padding-bottom: 3.5rem;
 }
 
 @media (max-width: 1023px) {
   .section-viewport {
     min-height: auto;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: #FFFDF9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D6C7B7;
+  background: #D97706;
   border-radius: 9999px;
+  border: 2px solid #FFFDF9;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A89F91;
+  background: #B45309;
+}
+
+/* =========================================================================
+   KEYFRAME ANIMATIONS FOR CUTE PAPAD MASCOTS & PLAYFUL UI
+   ========================================================================= */
+
+@keyframes papad-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+@keyframes papad-wiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-7deg) scale(1.09);
+  }
+  75% {
+    transform: rotate(7deg) scale(1.09);
+  }
+}
+
+@keyframes papad-blink {
+  0%, 92%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-papad-bounce {
+  animation: papad-bounce 2.6s ease-in-out infinite;
+}
+
+.animate-papad-wiggle {
+  animation: papad-wiggle 0.4s ease-in-out;
+}
+
+.animate-papad-blink {
+  transform-origin: center;
+  animation: papad-blink 3.8s infinite;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+/* =========================================================================
+   PLAYFUL CARTOONISH UI COMPONENTS
+   ========================================================================= */
+
+/* Chunky Playful 3D Buttons */
+.cartoon-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #C2410C;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 1rem;
+  border: 2.5px solid #1C1917;
+  box-shadow: 0 4px 0 #1C1917;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+.cartoon-btn-primary:hover {
+  background-color: #EA580C;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1C1917;
+}
+.cartoon-btn-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1C1917;
+}
+
+.cartoon-btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #15803D;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 1rem;
+  border: 2.5px solid #1C1917;
+  box-shadow: 0 4px 0 #1C1917;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+.cartoon-btn-whatsapp:hover {
+  background-color: #16A34A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1C1917;
+}
+.cartoon-btn-whatsapp:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1C1917;
+}
+
+.cartoon-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-weight: 700;
+  border-radius: 1rem;
+  border: 2.5px solid #1C1917;
+  box-shadow: 0 4px 0 #1C1917;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+.cartoon-btn-secondary:hover {
+  background-color: #FEF3C7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #1C1917;
+}
+.cartoon-btn-secondary:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1C1917;
+}
+
+/* Chunky Playful Cartoon Cards */
+.cartoon-card {
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+  border: 2.5px solid #1C1917;
+  box-shadow: 0 6px 0 #1C1917;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cartoon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 #1C1917;
+}
+
+.cartoon-card-subtle {
+  background-color: #FFFDF7;
+  border-radius: 1.25rem;
+  border: 2px solid #E5E7EB;
+  box-shadow: 0 4px 0 #E5E7EB;
+  transition: all 0.2s ease;
+}
+.cartoon-card-subtle:hover {
+  border-color: #1C1917;
+  box-shadow: 0 6px 0 #1C1917;
+  transform: translateY(-2px);
+}
+
+/* Playful Cartoon Badges */
+.cartoon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: 9999px;
+  border: 2px solid #1C1917;
+  box-shadow: 0 2px 0 #1C1917;
+  user-select: none;
 }
