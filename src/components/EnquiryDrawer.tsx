@@ -90,8 +90,8 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
         }}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
-        <div className="w-screen max-w-md bg-[#FFFDF7] border-l-4 border-stone-900 flex flex-col shadow-2xl">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+        <div className="w-screen max-w-md bg-[#FFFDF7] border-l-0 sm:border-l-4 border-stone-900 flex flex-col shadow-2xl">
           {/* Header with Cartoon Mascot Avatar */}
           <div className="px-6 py-5 border-b-2 border-stone-900 flex items-center justify-between bg-amber-400">
             <div className="flex items-center gap-2.5">
@@ -116,7 +116,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
           </div>
 
           {/* Body */}
-          <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+          <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4" data-lenis-prevent>
             {items.length === 0 ? (
               <div className="text-center py-16 space-y-3">
                 <div className="w-20 h-20 mx-auto rounded-full bg-amber-100 border-2 border-stone-900 flex items-center justify-center shadow-[0_4px_0_#1c1917]">
@@ -264,7 +264,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder={t.basket.enterCityPlaceholder}
-                    className="w-full text-xs font-bold px-3 py-2.5 bg-white border-2 border-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
+                    className="w-full text-base sm:text-xs font-bold px-3 py-2.5 bg-white border-2 border-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
                   />
                 </div>
 
@@ -282,19 +282,19 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     placeholder={t.basket.customNotePlaceholder}
-                    className="w-full text-xs font-bold px-3 py-2 bg-white border-2 border-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
+                    className="w-full text-base sm:text-xs font-bold px-3 py-2 bg-white border-2 border-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
                   />
                 </div>
               </div>
             )}
           </div>
 
-          {/* Footer CTA */}
-          <div className="p-5 border-t-2 border-stone-900 bg-white space-y-2">
+          {/* Footer CTA with Safe Area Handling */}
+          <div className="p-4 sm:p-5 border-t-2 border-stone-900 bg-white space-y-2 pb-[max(1.25rem,env(safe-area-inset-bottom,1.25rem))]">
             <button
               onClick={handleSendWhatsApp}
               disabled={items.length === 0}
-              className={`w-full py-4 px-4 font-black text-sm flex items-center justify-center gap-2 transition-all ${
+              className={`w-full py-3.5 sm:py-4 px-4 font-black text-sm flex items-center justify-center gap-2 transition-all min-h-[48px] ${
                 items.length > 0
                   ? 'cartoon-btn-whatsapp shadow-[0_4px_0_#1c1917]'
                   : 'bg-stone-200 text-stone-400 rounded-xl border-2 border-stone-300 cursor-not-allowed'

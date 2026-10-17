@@ -33,24 +33,24 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" data-lenis-prevent>
       <div className="fixed inset-0 bg-stone-900/60 backdrop-blur-xs cursor-pointer" onClick={onClose} />
 
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className="relative w-full max-w-lg bg-[#FAF7F2] rounded-xl border border-[#E7DFD5] shadow-2xl overflow-hidden my-8">
-          <div className="px-6 py-4 bg-white border-b border-[#E7DFD5] flex items-center justify-between">
+      <div className="flex min-h-full items-center justify-center p-2 sm:p-4">
+        <div className="relative w-full max-w-lg bg-[#FAF7F2] rounded-xl border border-[#E7DFD5] shadow-2xl overflow-hidden my-4 sm:my-8">
+          <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-white border-b border-[#E7DFD5] flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-[#C2410C]" />
-              <h3 className="text-base font-bold text-stone-900">
+              <h3 className="text-sm sm:text-base font-bold text-stone-900">
                 Store Contact & FSSAI Details
               </h3>
             </div>
-            <button onClick={onClose} className="p-1 text-stone-400 hover:text-stone-700 cursor-pointer">
+            <button onClick={onClose} className="p-1 text-stone-400 hover:text-stone-700 cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center">
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="p-6 space-y-4 text-xs">
+          <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 text-xs">
             <p className="text-stone-600">
               Update your direct WhatsApp enquiry number, business address, and FSSAI license.
             </p>
@@ -64,7 +64,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 value={formData.phoneWhatsApp}
                 onChange={(e) => setFormData({ ...formData, phoneWhatsApp: e.target.value })}
                 placeholder="+91 98250 12345"
-                className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md focus:ring-1 focus:ring-stone-900"
+                className="w-full px-3 py-2 bg-white border border-stone-300 rounded-md focus:ring-1 focus:ring-stone-900 text-base sm:text-xs font-medium"
                 required
               />
             </div>

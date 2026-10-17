@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Language, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { PRODUCTS } from '../data/products';
-import { MessageSquare, Phone, MapPin, Mail, Clock, Send, ShieldCheck, Truck, Sparkles } from 'lucide-react';
+import { MessageSquare, Phone, MapPin, Mail, Clock, Send, ShieldCheck, Truck } from 'lucide-react';
 import { sound } from '../utils/audioSynth';
 
 interface ContactViewProps {
@@ -47,10 +47,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Page Title: Single H1 */}
         <div className="border-b-2 border-stone-900 pb-6">
-          <div className="inline-flex items-center gap-1.5 bg-amber-400 text-stone-900 border-2 border-stone-900 px-3 py-1 rounded-full text-xs font-black shadow-[0_2px_0_#1c1917] mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-stone-900" />
-            <span>CONNECT WITH RAJKOT HQ</span>
-          </div>
+
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-stone-900">
             {t.contactPage.title}
           </h1>
@@ -228,7 +225,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                   <select
                     value={selectedProductId}
                     onChange={(e) => setSelectedProductId(e.target.value)}
-                    className="w-full px-3.5 py-3 bg-white border-2 border-stone-900 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
+                    className="w-full px-3.5 py-3 bg-white border-2 border-stone-900 rounded-xl text-base sm:text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
                   >
                     {PRODUCTS.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -252,7 +249,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                           sound.playPop();
                           setSelectedPack(opt.size);
                         }}
-                        className={`px-3.5 py-1.5 rounded-xl border-2 text-xs font-black cursor-pointer transition-all ${
+                        className={`px-3.5 py-2 sm:py-1.5 rounded-xl border-2 text-xs font-black cursor-pointer transition-all min-h-[38px] ${
                           selectedPack === opt.size
                             ? 'bg-stone-900 border-stone-900 text-amber-300 shadow-[0_2px_0_#1c1917]'
                             : 'bg-white border-stone-300 text-stone-700 hover:border-stone-900'
@@ -274,7 +271,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="e.g. Rajkot, Ahmedabad, Surat, Mumbai"
-                    className="w-full px-3.5 py-3 bg-white border-2 border-stone-900 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
+                    className="w-full px-3.5 py-3 bg-white border-2 border-stone-900 rounded-xl text-base sm:text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
                   />
                 </div>
 
@@ -288,13 +285,13 @@ export const ContactView: React.FC<ContactViewProps> = ({
                     value={userMessage}
                     onChange={(e) => setUserMessage(e.target.value)}
                     placeholder="Enter quantity needed or any specific inquiry..."
-                    className="w-full px-3.5 py-3 bg-white border-2 border-stone-900 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
+                    className="w-full px-3.5 py-3 bg-white border-2 border-stone-900 rounded-xl text-base sm:text-xs font-bold focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-[0_2px_0_#1c1917]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full cartoon-btn-whatsapp py-4 px-4 text-sm font-black shadow-[0_4px_0_#1c1917]"
+                  className="w-full cartoon-btn-whatsapp py-3.5 sm:py-4 px-4 text-sm font-black shadow-[0_4px_0_#1c1917] min-h-[48px]"
                 >
                   <MessageSquare className="w-5 h-5" />
                   <span>{t.contactPage.formSendWhatsApp}</span>

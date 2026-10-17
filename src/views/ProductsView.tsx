@@ -3,7 +3,7 @@ import { Language, ProductCategory, ProductItem, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { PRODUCTS } from '../data/products';
 import { PapadVisual } from '../components/PapadVisual';
-import { MessageSquare, Plus, Check, Flame, ChefHat, Sparkles } from 'lucide-react';
+import { MessageSquare, Plus, Check, Flame, ChefHat } from 'lucide-react';
 import { sound } from '../utils/audioSynth';
 
 interface ProductsViewProps {
@@ -55,27 +55,20 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
     }, 1500);
   };
 
-  const getSpiceText = (level: string) => {
-    if (level === 'spicy') return currentLang === 'gu' ? '🌶️ તીખો સ્વાદ' : currentLang === 'hi' ? '🌶️ तीखा स्वाद' : '🌶️ Spicy Kick';
-    if (level === 'medium') return currentLang === 'gu' ? '✨ મધ્યમ તીખો' : currentLang === 'hi' ? '✨ मध्यम तीखा' : '✨ Medium Spice';
-    return currentLang === 'gu' ? '🌿 હળવો મસાલો' : currentLang === 'hi' ? '🌿 हल्का मसाला' : '🌿 Mild & Aromatic';
-  };
+
 
   return (
     <div className="pt-28 pb-20 bg-[#FFFDF7] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Page Title: Single H1 per page with Playful Cartoon Styling */}
         <div className="border-b-2 border-stone-900 pb-6">
-          <div className="inline-flex items-center gap-1.5 bg-amber-400 text-stone-900 border-2 border-stone-900 px-3 py-1 rounded-full text-xs font-black shadow-[0_2px_0_#1c1917] mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-stone-900" />
-            <span>AUTHENTIC GUJARATI CATALOG</span>
-          </div>
+
           <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-stone-900">
             {currentLang === 'gu'
               ? 'સાક્ષી પ્રદીપ પાપડ પ્રોડક્ટ્સ'
               : currentLang === 'hi'
               ? 'साक्षी प्रदीप पापड़ उत्पाद सूची'
-              : 'Our Crunchy Papad Buddies'}
+              : 'Our Authentic Papad Varieties'}
           </h1>
           <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-stone-600 mt-2">
             <span className="cartoon-badge bg-amber-100 text-stone-900">Freshly Rolled 🫓</span>
@@ -84,8 +77,8 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
           </div>
         </div>
 
-        {/* Category Filter Tabs (Chunky 3D Segmented Control) */}
-        <div className="flex items-center gap-2 p-1.5 bg-stone-100 border-2 border-stone-900 rounded-2xl max-w-2xl overflow-x-auto text-xs font-black shadow-[0_3px_0_#1c1917]">
+        {/* Category Filter Tabs (Chunky 3D Segmented Control with smooth touch momentum scrolling) */}
+        <div className="flex items-center gap-2 p-1.5 bg-stone-100 border-2 border-stone-900 rounded-2xl max-w-2xl overflow-x-auto scroll-touch scrollbar-none text-xs font-black shadow-[0_3px_0_#1c1917]">
           {[
             { id: 'all' as ProductCategory, label: t.productsSection.categoryAll },
             { id: 'moong' as ProductCategory, label: t.productsSection.categoryMoong },
@@ -99,7 +92,7 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
                 sound.playPop();
                 setSelectedCategory(cat.id);
               }}
-              className={`px-4 py-2 rounded-xl whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3.5 sm:px-4 py-2 rounded-xl whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat.id
                   ? 'bg-amber-400 text-stone-900 border-2 border-stone-900 shadow-[0_3px_0_#1c1917] -translate-y-0.5'
                   : 'text-stone-700 hover:text-stone-900 hover:bg-white border-2 border-transparent'
@@ -111,7 +104,7 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
         </div>
 
         {/* Product Cards Grid with Chunky Cartoon Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-7">
           {filteredProducts.map((product) => {
             const currentPack = selectedPacks[product.id] || product.packOptions[1]?.size || product.packOptions[0]?.size;
             const isAdded = !!addedIds[product.id];
@@ -119,7 +112,7 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
             return (
               <div
                 key={product.id}
-                className="cartoon-card p-6 flex flex-col justify-between bg-[#FFFDF7] group"
+                className="cartoon-card p-4 sm:p-6 flex flex-col justify-between bg-[#FFFDF7] group"
               >
                 <div className="space-y-4">
                   {/* Cute Mascot Avatar for this specific variety */}
@@ -127,20 +120,9 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
                     <PapadVisual type={product.visualType} size="md" />
                   </div>
 
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-[11px] font-black text-amber-700 uppercase tracking-wider">
-                        {product.categoryLabel[currentLang]}
-                      </span>
-                      <span className="cartoon-badge bg-amber-50 text-stone-900 text-[10px] py-0.5 px-2">
-                        {getSpiceText(product.spiceLevel)}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-black text-stone-900 mt-1">
+                    <h3 className="text-xl font-black text-stone-900">
                       {product.name[currentLang]}
                     </h3>
-                  </div>
 
                   <p className="text-xs text-stone-600 leading-relaxed font-medium">
                     {product.description[currentLang]}
@@ -247,14 +229,14 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
 
       {/* Floating Bottom Bar if user has items in Enquiry List */}
       {totalEnquiriesCount > 0 && (
-        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-stone-900 text-white border-2 border-stone-900 px-6 py-3 rounded-full shadow-[0_6px_0_#1c1917] flex items-center gap-4 text-xs font-bold animate-papad-bounce">
-          <span className="text-amber-300">🫓 {totalEnquiriesCount} varieties in enquiry list</span>
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-stone-900 text-white border-2 border-stone-900 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-[0_6px_0_#1c1917] flex items-center justify-between gap-2.5 sm:gap-4 text-[11px] sm:text-xs font-bold animate-papad-bounce w-[92vw] sm:w-auto max-w-md">
+          <span className="text-amber-300 truncate">🫓 {totalEnquiriesCount} in enquiry list</span>
           <button
             onClick={() => {
               sound.playPop();
               onOpenBasket();
             }}
-            className="cartoon-btn-whatsapp py-1.5 px-3 text-xs shadow-none"
+            className="cartoon-btn-whatsapp py-1.5 px-3 text-[11px] sm:text-xs shadow-none shrink-0"
           >
             Review & Send WhatsApp
           </button>

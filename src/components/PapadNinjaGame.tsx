@@ -711,8 +711,21 @@ export const PapadNinjaGame: React.FC<PapadNinjaGameProps> = () => {
     });
     ro.observe(canvas);
 
+    let isVisible = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const wasVisible = isVisible;
+        isVisible = entries[0].isIntersecting;
+        if (!wasVisible && isVisible && isRunning) {
+          animFrameIdRef.current = requestAnimationFrame(render);
+        }
+      },
+      { threshold: 0.01, rootMargin: '100px' }
+    );
+    io.observe(canvas);
+
     const render = () => {
-      if (!isRunning) return;
+      if (!isRunning || !isVisible) return;
 
       const rect = canvas.getBoundingClientRect();
       const width = rect.width;
@@ -911,6 +924,7 @@ export const PapadNinjaGame: React.FC<PapadNinjaGameProps> = () => {
       isRunning = false;
       cancelAnimationFrame(animFrameIdRef.current);
       ro.disconnect();
+      io.disconnect();
     };
   }, [spawnPapad]);
 

@@ -23,7 +23,7 @@
     font-family: var(--font-sans);
     background-color: var(--bg-canvas);
     color: var(--text-body);
-    scroll-behavior: smooth;
+    scroll-behavior: auto !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -45,24 +45,42 @@
   }
 }
 
-/* 1 Viewport Rule for Desktop Sections */
+/* 1 Viewport Rule for Full-Screen Immersive Sections across Desktop, Tablet & Mobile */
 .section-viewport {
+  min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding-top: 5.5rem;
-  padding-bottom: 3.5rem;
+  padding-top: max(5.25rem, calc(4.5rem + env(safe-area-inset-top, 0px)));
+  padding-bottom: max(2.5rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 640px) {
   .section-viewport {
-    min-height: auto;
-    padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
+    padding-top: max(5rem, calc(4.25rem + env(safe-area-inset-top, 0px)));
+    padding-bottom: max(2rem, calc(1.75rem + env(safe-area-inset-bottom, 0px)));
   }
 }
+
+/* Smooth touch momentum scrolling for mobile carousels & filter tabs */
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -273,3 +291,33 @@
   box-shadow: 0 2px 0 #1C1917;
   user-select: none;
 }
+
+/* Lenis Super-Smooth Scrolling Optimizations */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Content Visibility Optimization for Blazing Fast Offscreen Rendering */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+

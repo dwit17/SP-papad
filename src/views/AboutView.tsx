@@ -1,8 +1,8 @@
 import React from 'react';
 import { Language, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
-import { PapadVisual } from '../components/PapadVisual';
-import { ShieldCheck, Sun, CheckCircle2, Award, ArrowRight, Sparkles, Heart } from 'lucide-react';
+import { PacketCardsShowcase } from '../components/PacketCardsShowcase';
+import { ShieldCheck, Sun, CheckCircle2, Award, ArrowRight } from 'lucide-react';
 import { sound } from '../utils/audioSynth';
 
 interface AboutViewProps {
@@ -23,36 +23,33 @@ export const AboutView: React.FC<AboutViewProps> = ({
   return (
     <div className="space-y-0 selection:bg-amber-300 selection:text-stone-900">
       {/* SECTION 1: ABOUT HERO (1 Viewport Height on Desktop) */}
-      <section className="section-viewport bg-[#FFFDF7] border-b-2 border-stone-900 relative">
+      <section className="section-viewport py-6 sm:py-0 bg-[#FFFDF7] border-b-2 border-stone-900 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="inline-flex items-center gap-1.5 bg-amber-400 text-stone-900 border-2 border-stone-900 px-3.5 py-1.5 rounded-full font-black text-xs shadow-[0_3px_0_#1c1917] animate-float-gentle">
-                <Sparkles className="w-4 h-4 text-stone-900" />
-                <span>MEET THE CRUNCH MAKERS</span>
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+            <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-left">
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-stone-900 leading-tight">
+
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-stone-900 leading-tight">
                 {t.aboutPage.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-stone-700">
+              <div className="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs font-bold text-stone-700">
                 <span className="cartoon-badge bg-amber-100 text-stone-900">Kathiyawadi Heritage 🏛️</span>
                 <span className="cartoon-badge bg-rose-100 text-stone-900">Unadulterated Dal 🌾</span>
                 <span className="cartoon-badge bg-emerald-100 text-stone-900">FSSAI Certified 🛡️</span>
               </div>
 
-              <p className="text-sm sm:text-base text-stone-700 leading-relaxed max-w-2xl font-medium">
+              <p className="text-xs sm:text-base text-stone-700 leading-relaxed max-w-2xl font-medium">
                 {t.aboutPage.traditionText}
               </p>
 
-              <div className="pt-3 flex flex-wrap items-center gap-4">
+              <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
                 <button
                   onClick={() => {
                     sound.playPop();
                     onNavigate('products');
                   }}
-                  className="cartoon-btn-primary px-6 py-3.5 text-xs font-black shadow-[0_4px_0_#1c1917]"
+                  className="cartoon-btn-primary px-5 sm:px-6 py-3 sm:py-3.5 text-xs font-black shadow-[0_4px_0_#1c1917] min-h-[44px]"
                 >
                   <span>{t.hero.ctaProducts}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -62,28 +59,28 @@ export const AboutView: React.FC<AboutViewProps> = ({
                     sound.playCrunch();
                     onOpenWhatsAppDirect();
                   }}
-                  className="cartoon-btn-whatsapp px-6 py-3.5 text-xs font-black shadow-[0_4px_0_#1c1917]"
+                  className="cartoon-btn-whatsapp px-5 sm:px-6 py-3 sm:py-3.5 text-xs font-black shadow-[0_4px_0_#1c1917] min-h-[44px]"
                 >
                   {t.nav.enquireWhatsApp}
                 </button>
               </div>
             </div>
 
-            <div className="lg:col-span-5 flex items-center justify-center">
-              <PapadVisual type="hero_platter" size="hero" />
+            <div className="lg:col-span-5 flex items-center justify-center w-full">
+              <PacketCardsShowcase
+                currentLang={currentLang}
+                onOpenWhatsAppDirect={onOpenWhatsAppDirect}
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTION 2: INGREDIENTS & DOUGH CRAFT (1 Viewport Height on Desktop) */}
-      <section className="section-viewport bg-white border-b-2 border-stone-900">
+      <section className="section-viewport bg-white border-b-2 border-stone-900 content-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center space-y-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-600 uppercase tracking-wider mb-1">
-              <Heart className="w-3.5 h-3.5 text-rose-500" />
-              <span>HANDMADE WITH DEVOTION</span>
-            </div>
+
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-stone-900">
               {t.aboutPage.ingredientsHeading}
             </h2>
@@ -91,10 +88,7 @@ export const AboutView: React.FC<AboutViewProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="cartoon-card p-6 space-y-3 bg-[#FFFDF7]">
-              <div className="flex items-center justify-between">
-                <span className="w-8 h-8 rounded-full bg-amber-400 text-stone-900 border-2 border-stone-900 font-black text-xs flex items-center justify-center shadow-[0_2px_0_#1c1917]">
-                  01
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="text-2xl">🌱</span>
               </div>
               <h3 className="text-base font-black text-stone-900">100% Desi Moong & Udad</h3>
@@ -104,10 +98,7 @@ export const AboutView: React.FC<AboutViewProps> = ({
             </div>
 
             <div className="cartoon-card p-6 space-y-3 bg-[#FFFDF7]">
-              <div className="flex items-center justify-between">
-                <span className="w-8 h-8 rounded-full bg-amber-400 text-stone-900 border-2 border-stone-900 font-black text-xs flex items-center justify-center shadow-[0_2px_0_#1c1917]">
-                  02
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="text-2xl">🌶️</span>
               </div>
               <h3 className="text-base font-black text-stone-900">Whole Cracked Spices</h3>
@@ -117,10 +108,7 @@ export const AboutView: React.FC<AboutViewProps> = ({
             </div>
 
             <div className="cartoon-card p-6 space-y-3 bg-[#FFFDF7]">
-              <div className="flex items-center justify-between">
-                <span className="w-8 h-8 rounded-full bg-amber-400 text-stone-900 border-2 border-stone-900 font-black text-xs flex items-center justify-center shadow-[0_2px_0_#1c1917]">
-                  03
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="text-2xl">🥜</span>
               </div>
               <h3 className="text-base font-black text-stone-900">Cold-Pressed Groundnut Oil</h3>
@@ -133,13 +121,10 @@ export const AboutView: React.FC<AboutViewProps> = ({
       </section>
 
       {/* SECTION 3: SUN-DRYING & HYGIENE (1 Viewport Height on Desktop) */}
-      <section className="section-viewport bg-[#FFFDF7] border-b-2 border-stone-900">
+      <section className="section-viewport bg-[#FFFDF7] border-b-2 border-stone-900 content-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center space-y-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-600 uppercase tracking-wider mb-1">
-              <Sun className="w-3.5 h-3.5 text-amber-500" />
-              <span>THE NATURAL METHOD</span>
-            </div>
+
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-stone-900">
               {t.aboutPage.processHeading}
             </h2>

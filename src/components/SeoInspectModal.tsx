@@ -79,32 +79,32 @@ export const SeoInspectModal: React.FC<SeoInspectModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" data-lenis-prevent>
       <div className="fixed inset-0 bg-stone-900/60 backdrop-blur-xs cursor-pointer" onClick={onClose} />
 
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className="relative w-full max-w-3xl bg-[#FAF7F2] rounded-xl border border-[#E7DFD5] shadow-2xl overflow-hidden my-8">
+      <div className="flex min-h-full items-center justify-center p-2 sm:p-4">
+        <div className="relative w-full max-w-3xl bg-[#FAF7F2] rounded-xl border border-[#E7DFD5] shadow-2xl overflow-hidden my-4 sm:my-8">
           {/* Header */}
-          <div className="px-6 py-4 bg-white border-b border-[#E7DFD5] flex items-center justify-between">
+          <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-white border-b border-[#E7DFD5] flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5 text-[#C2410C]" />
-              <h3 className="text-base font-bold text-stone-900">
+              <h3 className="text-sm sm:text-base font-bold text-stone-900">
                 SEO, GEO, AEO & Backlink Architecture
               </h3>
             </div>
             <button
               onClick={onClose}
-              className="p-1 text-stone-400 hover:text-stone-700 rounded-md cursor-pointer"
+              className="p-1 text-stone-400 hover:text-stone-700 rounded-md cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Tab Navigation */}
-          <div className="flex border-b border-stone-200 bg-stone-100/60 px-6 pt-3 gap-2 text-xs font-semibold">
+          {/* Tab Navigation (Horizontally scrollable on mobile) */}
+          <div className="flex border-b border-stone-200 bg-stone-100/60 px-4 sm:px-6 pt-3 gap-2 text-xs font-semibold overflow-x-auto scroll-touch scrollbar-none whitespace-nowrap">
             <button
               onClick={() => setActiveTab('llmstxt')}
-              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors ${
+              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors whitespace-nowrap ${
                 activeTab === 'llmstxt'
                   ? 'border-[#C2410C] text-[#C2410C]'
                   : 'border-transparent text-stone-600 hover:text-stone-900'
@@ -114,7 +114,7 @@ export const SeoInspectModal: React.FC<SeoInspectModalProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('schema')}
-              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors ${
+              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors whitespace-nowrap ${
                 activeTab === 'schema'
                   ? 'border-[#C2410C] text-[#C2410C]'
                   : 'border-transparent text-stone-600 hover:text-stone-900'
@@ -124,7 +124,7 @@ export const SeoInspectModal: React.FC<SeoInspectModalProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('backlinks')}
-              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors ${
+              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors whitespace-nowrap ${
                 activeTab === 'backlinks'
                   ? 'border-[#C2410C] text-[#C2410C]'
                   : 'border-transparent text-stone-600 hover:text-stone-900'
@@ -134,7 +134,7 @@ export const SeoInspectModal: React.FC<SeoInspectModalProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('cwv')}
-              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors ${
+              className={`pb-2 px-3 border-b-2 cursor-pointer transition-colors whitespace-nowrap ${
                 activeTab === 'cwv'
                   ? 'border-[#C2410C] text-[#C2410C]'
                   : 'border-transparent text-stone-600 hover:text-stone-900'
@@ -145,7 +145,7 @@ export const SeoInspectModal: React.FC<SeoInspectModalProps> = ({
           </div>
 
           {/* Tab Content */}
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {activeTab === 'llmstxt' && (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
