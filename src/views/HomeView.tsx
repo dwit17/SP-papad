@@ -5,7 +5,8 @@ import { PRODUCTS } from '../data/products';
 import { CITIES_DELIVERY } from '../data/cities';
 import { PapadVisual } from '../components/PapadVisual';
 import { PapadCrunch } from '../components/PapadCrunch';
-import { MessageSquare, ArrowRight, Check, Plus, ChevronDown, ChevronUp, Truck, Sun, Heart } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
+import { ArrowRight, Check, Plus, ChevronDown, ChevronUp, Truck, Sun, Heart, PhoneCall, Clock, Sparkles } from 'lucide-react';
 import { sound } from '../utils/audioSynth';
 
 interface HomeViewProps {
@@ -103,7 +104,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   }}
                   className="cartoon-btn-whatsapp px-5 sm:px-7 py-3 sm:py-4 text-xs sm:text-base font-black shadow-[0_4px_0_#1c1917] sm:shadow-[0_5px_0_#1c1917] min-h-[44px]"
                 >
-                  <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>{t.hero.ctaWhatsApp}</span>
                 </button>
               </div>
@@ -220,10 +221,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
                         sound.playCrunch();
                         onOpenWhatsAppDirect(product.name[currentLang]);
                       }}
-                      className="cartoon-btn-whatsapp py-2 px-2 text-xs font-black shadow-[0_3px_0_#1c1917] min-h-[40px]"
+                      className="cartoon-btn-whatsapp py-2 px-3 text-xs font-black shadow-[0_3px_0_#1c1917] min-h-[40px] flex items-center justify-center gap-1.5"
                     >
-                      <MessageSquare className="w-4 h-4" />
-                      <span>{t.nav.enquireWhatsApp}</span>
+                      <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                      <span>{t.productsSection.orderNow}</span>
                     </button>
                   </div>
                 </div>
@@ -233,40 +234,137 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
-      {/* SECTION 3: QUALITY & PROCESS (1 Viewport Height on Desktop) */}
-      <section className="section-viewport bg-[#FFFDF7] border-b-2 border-stone-900 content-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center space-y-5 sm:space-y-8">
-          <div>
-            <h2 className="text-xl sm:text-3xl font-black tracking-tight text-stone-900">
-              {t.qualitySection.title}
-            </h2>
+      {/* SECTION 3: QUALITY & PROCESS (Unique 3D Showcase with thiings.co icons) */}
+      <section className="section-viewport bg-[#FFFDF7] border-b-2 border-stone-900 content-auto py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center space-y-5 sm:space-y-7">
+          {/* Section Header with Authentic Craft Badge */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-2 border-stone-900/10 pb-3 sm:pb-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 border border-stone-900 text-stone-900 text-[11px] font-black uppercase tracking-wider mb-2 shadow-[0_2px_0_#1c1917]">
+                <span>✨</span>
+                <span>{currentLang === 'gu' ? 'અસલી પરંપરાગત બનાવટ' : currentLang === 'hi' ? 'प्रामाणिक पारंपरिक निर्माण' : 'Authentic 4-Step Craftsmanship'}</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-stone-900">
+                {t.qualitySection.title}
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm font-semibold text-stone-600 max-w-md">
+              {currentLang === 'gu' 
+                ? 'કોઈ શોર્ટકટ નહીં, કોઈ મશીન ઓવન નહીં — માત્ર શુદ્ધ દાળ અને સૌરાષ્ટ્રનો કુદરતી તડકો.' 
+                : currentLang === 'hi' 
+                ? 'कोई शॉर्टकट नहीं, कोई ओवन नहीं — केवल शुद्ध दाल और सौराष्ट्र की प्राकृतिक धूप।'
+                : 'Slow-crafted with pure Saurashtra sunshine, hand-rolled dough, and zero chemical preservatives.'}
+            </p>
           </div>
 
-          {/* 4 Playful Fact Cards: 2x2 on Mobile, 4-Col on Desktop */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          {/* 4 Unique 3D Process Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
             {[
-              { num: '01', title: t.qualitySection.fact1Title, desc: t.qualitySection.fact1Desc, emoji: '🌾' },
-              { num: '02', title: t.qualitySection.fact2Title, desc: t.qualitySection.fact2Desc, emoji: '☀️' },
-              { num: '03', title: t.qualitySection.fact3Title, desc: t.qualitySection.fact3Desc, emoji: '🌶️' },
-              { num: '04', title: t.qualitySection.fact4Title, desc: t.qualitySection.fact4Desc, emoji: '🛡️' },
+              {
+                num: '01',
+                stepLabel: 'STEP 01',
+                title: t.qualitySection.fact1Title,
+                desc: t.qualitySection.fact1Desc,
+                iconSrc: '/icons/thiings/wheat.png',
+                iconAlt: 'Pure Desi Dal - 3D Wheat & Grains from thiings.co',
+                tag: currentLang === 'gu' ? '૧૦૦% શુદ્ધ દાળ' : currentLang === 'hi' ? '१००% शुद्ध दाल' : '100% Pure Pulses',
+                badgeBg: 'bg-amber-100 text-amber-900 border-amber-300',
+                pedestalBg: 'bg-gradient-to-b from-amber-100 to-amber-200/60',
+                cardAccent: 'hover:border-amber-500',
+              },
+              {
+                num: '02',
+                stepLabel: 'STEP 02',
+                title: t.qualitySection.fact2Title,
+                desc: t.qualitySection.fact2Desc,
+                iconSrc: '/icons/thiings/rolling-pin.png',
+                iconAlt: 'Authentic Hand-Rolled Dough - 3D Rolling Pin from thiings.co',
+                tag: currentLang === 'gu' ? 'હાથવણાટ કણક' : currentLang === 'hi' ? 'हाथ से बेला गया' : 'Hand-Rolled Dough',
+                badgeBg: 'bg-orange-100 text-orange-900 border-orange-300',
+                pedestalBg: 'bg-gradient-to-b from-orange-100 to-orange-200/60',
+                cardAccent: 'hover:border-orange-500',
+              },
+              {
+                num: '03',
+                stepLabel: 'STEP 03',
+                title: t.qualitySection.fact3Title,
+                desc: t.qualitySection.fact3Desc,
+                iconSrc: '/icons/thiings/sun.png',
+                iconAlt: 'Gujarat Sun-Drying - 3D Radiant Sun from thiings.co',
+                tag: currentLang === 'gu' ? 'કુદરતી સૂર્યપ્રકાશ' : currentLang === 'hi' ? 'प्राकृतिक धूप' : 'Natural Sun Cured',
+                badgeBg: 'bg-yellow-100 text-yellow-900 border-yellow-300',
+                pedestalBg: 'bg-gradient-to-b from-yellow-100 to-yellow-200/60',
+                cardAccent: 'hover:border-yellow-500',
+              },
+              {
+                num: '04',
+                stepLabel: 'STEP 04',
+                title: t.qualitySection.fact4Title,
+                desc: t.qualitySection.fact4Desc,
+                iconSrc: '/icons/thiings/verified-shield.png',
+                iconAlt: 'Hygienic Moisture-Lock - 3D Verified Shield from thiings.co',
+                tag: currentLang === 'gu' ? '૧૨ મહિના ફ્રેશ' : currentLang === 'hi' ? '१२ महीने ताज़ा' : '12-Month Crunch',
+                badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+                pedestalBg: 'bg-gradient-to-b from-emerald-100 to-emerald-200/60',
+                cardAccent: 'hover:border-emerald-500',
+              },
             ].map((fact) => (
               <div
                 key={fact.num}
-                className="cartoon-card p-3.5 sm:p-5 space-y-2 sm:space-y-3 bg-white flex flex-col justify-between"
+                onClick={() => sound.playPop()}
+                className={`group cartoon-card p-4 sm:p-5 bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_0_#1c1917] cursor-pointer ${fact.cardAccent}`}
               >
                 <div>
-                  <div className="flex items-center justify-end mb-1.5 sm:mb-2">
-                    <span className="text-xl sm:text-2xl">{fact.emoji}</span>
+                  {/* Top Row: Step Tag & Category Pill */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-[10px] font-black tracking-wider text-stone-900 bg-stone-100 px-2 py-0.5 rounded-md border border-stone-900 shadow-[0_1.5px_0_#1c1917]">
+                      {fact.stepLabel}
+                    </span>
+                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${fact.badgeBg}`}>
+                      {fact.tag}
+                    </span>
                   </div>
-                  <h3 className="text-xs sm:text-sm font-black text-stone-900 leading-snug">
+
+                  {/* Heroic 3D Icon Floating Pedestal (thiings.co 3D Asset) */}
+                  <div className={`w-20 h-20 sm:w-24 sm:h-24 mx-auto my-2 rounded-2xl ${fact.pedestalBg} border-2 border-stone-900 flex items-center justify-center p-2 shadow-[0_3px_0_#1c1917] group-hover:shadow-[0_5px_0_#1c1917] transition-all`}>
+                    <img
+                      src={fact.iconSrc}
+                      alt={fact.iconAlt}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-[0_8px_12px_rgba(0,0,0,0.18)] group-hover:scale-115 group-hover:-translate-y-1.5 group-hover:rotate-3 transition-transform duration-300 select-none pointer-events-none"
+                    />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-sm sm:text-base font-black text-stone-900 leading-snug text-center mt-3 mb-1.5 group-hover:text-amber-800 transition-colors">
                     {fact.title}
                   </h3>
+
+                  {/* Description */}
+                  <p className="text-xs text-stone-600 leading-relaxed font-medium text-center">
+                    {fact.desc}
+                  </p>
                 </div>
-                <p className="text-[11px] sm:text-xs text-stone-600 leading-relaxed font-medium line-clamp-3 sm:line-clamp-none">
-                  {fact.desc}
-                </p>
+
+                {/* Subtle Interactive Footer in Card */}
+                <div className="pt-3 mt-3 border-t border-stone-100 flex items-center justify-center text-[10px] font-bold text-stone-400 group-hover:text-stone-700 transition-colors">
+                  <span>Guaranteed Authentic Taste ✦</span>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Bottom Trust & Quality Banner */}
+          <div className="cartoon-card bg-amber-50/80 p-3 sm:p-3.5 border-2 border-stone-900 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs font-bold text-stone-800 shadow-[0_3px_0_#1c1917]">
+            <div className="flex items-center gap-2">
+              <span className="text-base sm:text-lg">🌾</span>
+              <span>100% Moong & Udad Dal • Cold-Pressed Groundnut Oil • Natural Papad Khar</span>
+            </div>
+            <div className="flex items-center gap-2 text-stone-900 font-black">
+              <span className="text-emerald-600">✓</span>
+              <span>Zero Artificial Additives or Oven Curing</span>
+            </div>
           </div>
         </div>
       </section>
@@ -313,35 +411,38 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           {/* City Selection Matrix & Delivery Timeline */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-start">
-            <div className="lg:col-span-7 cartoon-card p-4 sm:p-6 space-y-4 sm:space-y-5 bg-white">
-              <span className="text-[11px] sm:text-xs font-black text-stone-800 block">
-                {t.deliverySection.checkCityPrompt}
-              </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-stretch">
+            {/* Left Card: City Selection Matrix */}
+            <div className="lg:col-span-7 cartoon-card p-4 sm:p-6 bg-white flex flex-col justify-between h-full">
+              <div className="space-y-3 sm:space-y-4">
+                <span className="text-[11px] sm:text-xs font-black text-stone-800 block">
+                  {t.deliverySection.checkCityPrompt}
+                </span>
 
-              <div className="grid grid-cols-4 sm:grid-cols-4 gap-1.5 sm:gap-2.5">
-                {CITIES_DELIVERY.map((city) => (
-                  <button
-                    key={city.id}
-                    onClick={() => {
-                      sound.playPop();
-                      setSelectedCityId(city.id);
-                    }}
-                    className={`p-2 sm:p-3 rounded-xl text-left border-2 text-[11px] sm:text-xs transition-all cursor-pointer ${
-                      selectedCityId === city.id
-                        ? 'border-stone-900 bg-amber-400 text-stone-900 font-black shadow-[0_2px_0_#1c1917] sm:shadow-[0_3px_0_#1c1917] -translate-y-0.5'
-                        : 'border-stone-200 bg-stone-50 hover:border-stone-900 text-stone-800'
-                    }`}
-                  >
-                    <span className="block font-black truncate">{city.city[currentLang]}</span>
-                    <span className={`text-[9px] sm:text-[10px] font-bold block truncate ${selectedCityId === city.id ? 'text-stone-800' : 'text-stone-500'}`}>
-                      {city.state[currentLang]}
-                    </span>
-                  </button>
-                ))}
+                <div className="grid grid-cols-4 sm:grid-cols-4 gap-1.5 sm:gap-2.5">
+                  {CITIES_DELIVERY.map((city) => (
+                    <button
+                      key={city.id}
+                      onClick={() => {
+                        sound.playPop();
+                        setSelectedCityId(city.id);
+                      }}
+                      className={`p-2 sm:p-3 rounded-xl text-left border-2 text-[11px] sm:text-xs transition-all cursor-pointer ${
+                        selectedCityId === city.id
+                          ? 'border-stone-900 bg-amber-400 text-stone-900 font-black shadow-[0_2px_0_#1c1917] sm:shadow-[0_3px_0_#1c1917] -translate-y-0.5'
+                          : 'border-stone-200 bg-stone-50 hover:border-stone-900 text-stone-800'
+                      }`}
+                    >
+                      <span className="block font-black truncate">{city.city[currentLang]}</span>
+                      <span className={`text-[9px] sm:text-[10px] font-bold block truncate ${selectedCityId === city.id ? 'text-stone-800' : 'text-stone-500'}`}>
+                        {city.state[currentLang]}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className="pt-3 sm:pt-4 border-t-2 border-stone-200 grid grid-cols-2 gap-2 sm:gap-4 text-xs font-bold">
+              <div className="pt-3 sm:pt-4 mt-4 border-t-2 border-stone-200 grid grid-cols-2 gap-2 sm:gap-4 text-xs font-bold">
                 <div className="flex items-center gap-2 sm:gap-2.5">
                   <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-red-100 border-2 border-stone-900 flex items-center justify-center shrink-0">
                     <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-600" />
@@ -358,23 +459,43 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </div>
                   <div>
                     <span className="text-stone-500 block text-[10px] sm:text-[11px]">Availability:</span>
-                    <span className="font-black text-stone-900 text-xs sm:text-sm">Retail & Wholesale</span>
+                    <span className="font-black text-stone-900 text-xs sm:text-sm">{t.deliverySection.wholesaleBadge}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 cartoon-card p-4 sm:p-6 space-y-3 sm:space-y-4 bg-amber-50">
-              <div className="flex items-center gap-2">
-                <span className="text-xl sm:text-2xl">🇮🇳</span>
-                <h3 className="text-sm sm:text-base font-black text-stone-900">
-                  Pan-India Supply & Transport
-                </h3>
+            {/* Right Card: Pan-India Transport & Dispatch */}
+            <div className="lg:col-span-5 cartoon-card p-4 sm:p-6 bg-amber-50 flex flex-col justify-between h-full">
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src="/images/india-flag.webp"
+                    alt="Indian Flag"
+                    className="w-7 h-[18px] sm:w-8 sm:h-5 object-cover rounded shadow-xs border border-stone-400 shrink-0"
+                  />
+                  <h3 className="text-sm sm:text-base font-black text-stone-900">
+                    Pan-India Supply & Transport
+                  </h3>
+                </div>
+
+                <p className="text-xs text-stone-700 leading-relaxed font-medium">
+                  {t.deliverySection.panIndiaNote}
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+                  <div className="p-2.5 bg-white/80 rounded-xl border-2 border-stone-900/10 shadow-xs flex flex-col justify-between">
+                    <span className="text-[10px] font-bold text-stone-500">Retail Dispatch</span>
+                    <span className="font-black text-stone-900 mt-0.5">Express Courier</span>
+                  </div>
+                  <div className="p-2.5 bg-white/80 rounded-xl border-2 border-stone-900/10 shadow-xs flex flex-col justify-between">
+                    <span className="text-[10px] font-bold text-stone-500">Bulk & Merchant</span>
+                    <span className="font-black text-stone-900 mt-0.5">Road Transport</span>
+                  </div>
+                </div>
               </div>
-              <p className="text-xs text-stone-700 leading-relaxed font-medium">
-                {t.deliverySection.panIndiaNote}
-              </p>
-              <div className="pt-1">
+
+              <div className="pt-3 sm:pt-4 mt-4 border-t-2 border-amber-200">
                 <button
                   onClick={() => {
                     sound.playCrunch();
@@ -382,7 +503,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   }}
                   className="w-full cartoon-btn-whatsapp py-2.5 sm:py-3 px-3 sm:px-4 text-xs font-black shadow-[0_3px_0_#1c1917] sm:shadow-[0_4px_0_#1c1917] min-h-[42px]"
                 >
-                  <MessageSquare className="w-4 h-4" />
+                  <WhatsAppIcon className="w-4 h-4 shrink-0" />
                   <span>Enquire for {selectedCity.city[currentLang]}</span>
                 </button>
               </div>
@@ -437,29 +558,111 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* SECTION 7: CLOSING CTA (1 Viewport Height on Desktop) */}
-      <section className="section-viewport bg-amber-400 border-b-2 border-stone-900 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center text-center space-y-4 sm:space-y-6 relative z-10">
+      <section className="section-viewport bg-amber-400 border-b-2 border-stone-900 relative overflow-hidden flex flex-col justify-center">
+        {/* Playful background decorative glows */}
+        <div className="absolute top-12 left-10 w-48 h-48 bg-amber-300 rounded-full opacity-40 blur-2xl pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-64 h-64 bg-amber-500 rounded-full opacity-30 blur-3xl pointer-events-none" />
 
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-stone-900">
-            {t.ctaSection.title}
-          </h2>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center py-4 sm:py-6 relative z-10">
+          <div className="cartoon-card bg-[#FFFDF7] p-5 sm:p-7 lg:p-9 shadow-[0_8px_0_#1c1917] sm:shadow-[0_12px_0_#1c1917] border-3 border-stone-900 relative overflow-hidden">
+            {/* Soft decorative background tint inside card */}
+            <div className="absolute -top-16 -right-16 w-56 h-56 bg-amber-100 rounded-full pointer-events-none opacity-50" />
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-1 sm:pt-2">
-            <button
-              onClick={() => {
-                sound.playCrunch();
-                onOpenWhatsAppDirect();
-              }}
-              className="cartoon-btn-whatsapp px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-black shadow-[0_4px_0_#1c1917] sm:shadow-[0_5px_0_#1c1917] min-h-[48px]"
-            >
-              <MessageSquare className="w-5 h-5" />
-              <span>{t.ctaSection.buttonText}</span>
-            </button>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
+              {/* Left Column: Illustrative 3D Mascot & Papad Stack */}
+              <div className="lg:col-span-5 flex flex-col items-center justify-center">
+                <div className="bg-gradient-to-b from-amber-100/90 to-amber-200/50 rounded-2xl sm:rounded-3xl p-3 sm:p-5 border-2 border-stone-900 w-full flex flex-col items-center justify-center relative shadow-[0_4px_0_#1c1917]">
+                  {/* Floating badge top-left */}
+                  <div className="absolute -top-3 -left-2 sm:-left-3 bg-amber-300 border-2 border-stone-900 text-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full shadow-[0_2px_0_#1c1917] rotate-[-3deg] flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-800" />
+                    <span>100% Sun-Dried</span>
+                  </div>
 
-          <div className="text-[11px] sm:text-xs font-bold text-stone-800 space-y-0.5 sm:space-y-1">
-            <p className="font-black text-stone-900">{t.ctaSection.directCallText}</p>
-            <p>{t.ctaSection.businessHoursText}</p>
+                  {/* Floating badge bottom-right */}
+                  <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-emerald-500 text-white border-2 border-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full shadow-[0_2px_0_#1c1917] rotate-[2deg] flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                    <span>Fresh Kathiyawadi</span>
+                  </div>
+
+                  {/* 3D Illustration */}
+                  <img
+                    src="/images/cta-chef-papad-transparent.webp"
+                    alt="Authentic Kathiyawadi Papad with Chef Mascot"
+                    className="w-44 sm:w-52 lg:w-60 h-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300 select-none"
+                  />
+                </div>
+              </div>
+
+              {/* Right Column: Copy & Actions */}
+              <div className="lg:col-span-7 flex flex-col justify-center space-y-3 sm:space-y-4 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border-2 border-stone-900 text-stone-900 text-[10px] sm:text-xs font-black shadow-[0_2px_0_#1c1917] self-start">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Direct Orders & Trade Inquiries</span>
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-stone-900 leading-tight">
+                  {t.ctaSection.title}
+                </h2>
+
+                <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-medium">
+                  {currentLang === 'gu'
+                    ? 'કાઠિયાવાડી સ્વાદના અસલી તડકામાં સુકવેલા પાપડ તમારા ઘર કે દુકાન માટે મંગાવો. વોટ્સએપ પર તુરંત ઓર્ડર કે પૂછપરછ કરો.'
+                    : currentLang === 'hi'
+                    ? 'काठियावाड़ी स्वाद के असली धूप में सुखाए पापड़ अपने घर या दुकान के लिए मंगवाएं। व्हाट्सएप पर तुरंत ऑर्डर या पूछताछ करें।'
+                    : 'Bring the authentic Kathiyawadi sun-dried crunch to your dining table or grocery store. Send your requirements for fast doorstep dispatch across India.'}
+                </p>
+
+                {/* Pack type pills */}
+                <div className="grid grid-cols-2 gap-2 text-[11px] sm:text-xs font-black text-stone-800">
+                  <div className="flex items-center gap-2 p-2 bg-amber-50/80 rounded-xl border border-stone-200">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 border border-stone-900 flex items-center justify-center shrink-0">
+                      <Check className="w-3 h-3 text-emerald-700" />
+                    </div>
+                    <span>{currentLang === 'gu' ? '૨૦૦ગ્રા - ૧કિલો રિટેલ' : currentLang === 'hi' ? '200g - 1kg रिटेल पैक' : 'Retail 200g - 1kg'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 p-2 bg-amber-50/80 rounded-xl border border-stone-200">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 border border-stone-900 flex items-center justify-center shrink-0">
+                      <Check className="w-3 h-3 text-emerald-700" />
+                    </div>
+                    <span>{currentLang === 'gu' ? '૫કિલો / ૧૦કિલો હોલસેલ' : currentLang === 'hi' ? '5kg / 10kg थोक कार्टन' : '5kg & 10kg Bulk'}</span>
+                  </div>
+                </div>
+
+                {/* Primary CTA Buttons */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+                  <button
+                    onClick={() => {
+                      sound.playCrunch();
+                      onOpenWhatsAppDirect();
+                    }}
+                    className="cartoon-btn-whatsapp px-5 sm:px-7 py-3 sm:py-3.5 text-xs sm:text-sm font-black shadow-[0_4px_0_#1c1917] sm:shadow-[0_5px_0_#1c1917] min-h-[46px] flex-1 justify-center"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 shrink-0" />
+                    <span>{t.ctaSection.buttonText}</span>
+                  </button>
+
+                  <a
+                    href="tel:+919825012345"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:py-3.5 rounded-xl border-2 border-stone-900 bg-stone-100 hover:bg-amber-100 text-stone-900 text-xs sm:text-sm font-black shadow-[0_3px_0_#1c1917] transition-all min-h-[46px]"
+                  >
+                    <PhoneCall className="w-4 h-4 text-emerald-700 shrink-0" />
+                    <span>{currentLang === 'gu' ? 'કોલ કરો' : currentLang === 'hi' ? 'कॉल करें' : 'Call Support'}</span>
+                  </a>
+                </div>
+
+                {/* Contact & Hours */}
+                <div className="pt-2 border-t-2 border-stone-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px] font-bold text-stone-600">
+                  <span className="text-stone-900 font-black flex items-center gap-1.5">
+                    <PhoneCall className="w-3 h-3 text-stone-500" />
+                    {t.ctaSection.directCallText}
+                  </span>
+                  <span className="flex items-center gap-1.5 text-stone-500">
+                    <Clock className="w-3 h-3 text-stone-400" />
+                    {t.ctaSection.businessHoursText}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

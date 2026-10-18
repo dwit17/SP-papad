@@ -1,7 +1,8 @@
 import React from 'react';
 import { Language, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
-import { MessageSquare, MapPin, ShieldCheck, Globe } from 'lucide-react';
+import { MapPin, ShieldCheck, Globe } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { sound } from '../utils/audioSynth';
 import { PapadNinjaGame } from './PapadNinjaGame';
 
@@ -114,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({
                     }}
                     className="cartoon-btn-whatsapp py-1 px-2.5 sm:py-1.5 sm:px-3.5 text-[11px] sm:text-xs font-black shadow-[0_2px_0_#1c1917] inline-flex items-center gap-1.5 cursor-pointer transition-transform hover:scale-102"
                   >
-                    <MessageSquare className="w-3.5 h-3.5 shrink-0" />
+                    <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
                     <span>WhatsApp Chat</span>
                   </button>
                 </div>
@@ -171,11 +172,30 @@ export const Footer: React.FC<FooterProps> = ({
 
           </div>
 
-          {/* Copyright Row inside the dock card */}
-          <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-stone-200/90 flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-stone-500 font-medium text-center sm:text-left">
+          {/* Legal Links & Copyright Row inside the dock card */}
+          <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-stone-200/90 flex flex-col lg:flex-row items-center justify-between gap-2.5 text-[10px] sm:text-xs text-stone-500 font-medium text-center lg:text-left">
             <p>© {new Date().getFullYear()} {storeConfig.brandName}. {t.footer.copyright}</p>
-            <p className="flex items-center gap-1">
-              <span>Handcrafted with 100% natural lentils in Rajkot, Gujarat</span>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-black text-stone-700">
+              <button onClick={() => handleNav('checkout')} className="hover:text-amber-600 cursor-pointer transition-colors">
+                Checkout
+              </button>
+              <span>•</span>
+              <button onClick={() => handleNav('shipping-policy')} className="hover:text-amber-600 cursor-pointer transition-colors">
+                Shipping Policy
+              </button>
+              <span>•</span>
+              <button onClick={() => handleNav('terms')} className="hover:text-amber-600 cursor-pointer transition-colors">
+                Terms & Conditions
+              </button>
+              <span>•</span>
+              <button onClick={() => handleNav('privacy-policy')} className="hover:text-amber-600 cursor-pointer transition-colors">
+                Privacy Policy
+              </button>
+            </div>
+
+            <p className="flex items-center gap-1 font-bold text-stone-600">
+              <span>Handcrafted in Rajkot, Gujarat</span>
               <span>🌶️</span>
             </p>
           </div>

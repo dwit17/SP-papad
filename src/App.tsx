@@ -8,6 +8,10 @@ import { HomeView } from './views/HomeView';
 import { ProductsView } from './views/ProductsView';
 import { AboutView } from './views/AboutView';
 import { ContactView } from './views/ContactView';
+import { TermsView } from './views/TermsView';
+import { ShippingPolicyView } from './views/ShippingPolicyView';
+import { PrivacyPolicyView } from './views/PrivacyPolicyView';
+import { CheckoutView } from './views/CheckoutView';
 import { EnquiryDrawer } from './components/EnquiryDrawer';
 import { SeoInspectModal } from './components/SeoInspectModal';
 import { SettingsModal } from './components/SettingsModal';
@@ -41,10 +45,11 @@ export default function App() {
     return 'en';
   });
 
-  // Active view tab (home, products, about, contact)
+  // Active view tab (home, products, about, contact, checkout, terms, shipping-policy, privacy-policy)
   const [activeTab, setActiveTab] = useState<string>(() => {
     const hash = window.location.hash.replace('#', '');
-    if (hash === 'products' || hash === 'about' || hash === 'contact') {
+    const validTabs = ['products', 'about', 'contact', 'checkout', 'terms', 'shipping-policy', 'privacy-policy'];
+    if (validTabs.includes(hash)) {
       return hash;
     }
     return 'home';
@@ -134,7 +139,8 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash === 'products' || hash === 'about' || hash === 'contact') {
+      const validTabs = ['products', 'about', 'contact', 'checkout', 'terms', 'shipping-policy', 'privacy-policy'];
+      if (validTabs.includes(hash)) {
         setActiveTab(hash);
       } else {
         setActiveTab('home');
@@ -288,6 +294,43 @@ export default function App() {
               onOpenWhatsAppDirect={handleOpenWhatsAppDirect}
             />
           )}
+
+          {activeTab === 'terms' && (
+            <TermsView
+              currentLang={currentLang}
+              onNavigate={handleNavigate}
+              storeConfig={storeConfig}
+            />
+          )}
+
+          {activeTab === 'shipping-policy' && (
+            <ShippingPolicyView
+              currentLang={currentLang}
+              onNavigate={handleNavigate}
+              storeConfig={storeConfig}
+            />
+          )}
+
+          {activeTab === 'privacy-policy' && (
+            <PrivacyPolicyView
+              currentLang={currentLang}
+              onNavigate={handleNavigate}
+              storeConfig={storeConfig}
+            />
+          )}
+
+          {activeTab === 'checkout' && (
+            <CheckoutView
+              currentLang={currentLang}
+              onNavigate={handleNavigate}
+              enquiryItems={enquiryItems}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveItem}
+              onClearBasket={handleClearBasket}
+              onAddToEnquiry={handleAddToEnquiry}
+              storeConfig={storeConfig}
+            />
+          )}
         </main>
 
         {/* Global Footer */}
@@ -310,6 +353,7 @@ export default function App() {
           onClearAll={handleClearBasket}
           currentLang={currentLang}
           storeConfig={storeConfig}
+          onNavigate={handleNavigate}
         />
 
         {/* SEO / GEO / AEO / Backlink Inspector Modal */}

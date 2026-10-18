@@ -202,6 +202,23 @@
   box-shadow: 0 1px 0 #1C1917;
 }
 
+/* Smart auto-hiding header for seamless & smooth scroll UX */
+.header-smart-nav {
+  transform: translateY(0);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.header-smart-nav.header-hidden {
+  transform: translateY(-105%);
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+.header-smart-nav.header-visible {
+  transform: translateY(0);
+}
+
 .cartoon-btn-whatsapp {
   display: inline-flex;
   align-items: center;
@@ -253,8 +270,10 @@
 }
 
 /* Chunky Playful Cartoon Cards */
-.cartoon-card {
+:where(.cartoon-card) {
   background-color: #FFFFFF;
+}
+.cartoon-card {
   border-radius: 1.5rem;
   border: 2.5px solid #1C1917;
   box-shadow: 0 6px 0 #1C1917;

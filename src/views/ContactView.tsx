@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Language, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { PRODUCTS } from '../data/products';
-import { MessageSquare, Phone, MapPin, Mail, Clock, Send, ShieldCheck, Truck } from 'lucide-react';
+import { Phone, MapPin, Mail, Clock, Send, ShieldCheck, Truck } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { sound } from '../utils/audioSynth';
 
 interface ContactViewProps {
@@ -83,7 +84,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
 
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-emerald-100 border-2 border-stone-900 flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-4 h-4 text-emerald-600" />
+                    <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
                   </div>
                   <div>
                     <span className="font-black text-stone-900 block text-xs">
@@ -148,16 +149,25 @@ export const ContactView: React.FC<ContactViewProps> = ({
               </div>
             </div>
 
-            {/* Wholesale Information Box */}
-            <div className="cartoon-card p-6 space-y-3 bg-stone-900 text-stone-200">
-              <div className="flex items-center gap-2 text-amber-300 font-black text-sm">
-                <Truck className="w-5 h-5 text-amber-400" />
-                <span>{t.contactPage.wholesaleHeading}</span>
+            {/* Wholesale Information Box - High Visibility & Contrast */}
+            <div className="cartoon-card p-5 sm:p-6 space-y-3.5 bg-amber-100 border-2 border-stone-900 shadow-[0_4px_0_#1c1917]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-amber-400 border-2 border-stone-900 flex items-center justify-center shrink-0 shadow-[0_2px_0_#1c1917]">
+                  <Truck className="w-4 h-4 text-stone-900" />
+                </div>
+                <span className="text-stone-900 font-black text-sm sm:text-base">
+                  {t.contactPage.wholesaleHeading}
+                </span>
               </div>
-              <p className="text-xs text-stone-300 leading-relaxed font-medium">
+
+              <p className="text-xs sm:text-sm text-stone-800 leading-relaxed font-semibold">
                 {t.contactPage.wholesaleText}
               </p>
-              <div className="text-[11px] text-amber-200 pt-2 border-t border-stone-800 font-bold">
+
+              <div className="p-3 bg-white rounded-xl border-2 border-stone-900 text-xs text-stone-900 font-bold leading-relaxed shadow-[0_2px_0_#1c1917]">
+                <span className="font-black text-amber-900 block text-[10px] uppercase tracking-wider mb-1">
+                  Bulk Merchant & Catering Rates
+                </span>
                 Bulk 5 kg & 10 kg master corrugated cartons with wholesale transport rates across Gujarat, Maharashtra, Delhi, and pan-India.
               </div>
             </div>
@@ -293,7 +303,7 @@ export const ContactView: React.FC<ContactViewProps> = ({
                   type="submit"
                   className="w-full cartoon-btn-whatsapp py-3.5 sm:py-4 px-4 text-sm font-black shadow-[0_4px_0_#1c1917] min-h-[48px]"
                 >
-                  <MessageSquare className="w-5 h-5" />
+                  <WhatsAppIcon className="w-5 h-5" />
                   <span>{t.contactPage.formSendWhatsApp}</span>
                 </button>
               </form>

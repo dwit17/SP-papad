@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useLenis } from 'lenis/react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
-import { MessageSquare, ShoppingBag, Menu, X, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, Menu, X, ShieldCheck } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { sound } from '../utils/audioSynth';
 
 interface HeaderProps {
@@ -26,7 +28,73 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenConfigModal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const isVisibleRef = useRef(true);
+  const lastScrollY = useRef(0);
   const t = TRANSLATIONS[currentLang];
+
+  const handleScrollUpdate = useCallback((currentY: number) => {
+    const safeY = Math.max(0, currentY);
+
+    // Keep header visible when mobile menu is open or near top of the page
+    if (mobileMenuOpen || safeY <= 60) {
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
+      lastScrollY.current = safeY;
+      return;
+    }
+
+    const delta = safeY - lastScrollY.current;
+
+    // Scrolling down past threshold -> smoothly hide header
+    if (delta > 8 && safeY > 80) {
+      if (isVisibleRef.current) {
+        isVisibleRef.current = false;
+        setIsVisible(false);
+      }
+    }
+    // Scrolling up past threshold -> smoothly reveal header
+    else if (delta < -6) {
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
+    }
+
+    lastScrollY.current = safeY;
+  }, [mobileMenuOpen]);
+
+  // Hook into Lenis smooth-scroll ticker
+  useLenis((lenis) => {
+    handleScrollUpdate(lenis.scroll);
+  }, [handleScrollUpdate]);
+
+  // Native window scroll listener fallback
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY || document.documentElement.scrollTop;
+          handleScrollUpdate(currentY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScrollUpdate]);
+
+  // Reset header to visible whenever activeTab changes
+  useEffect(() => {
+    isVisibleRef.current = true;
+    setIsVisible(true);
+    lastScrollY.current = 0;
+  }, [activeTab]);
 
   const handleNavClick = (tab: string) => {
     sound.playPop();
@@ -40,7 +108,11 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#FFFDF7]/95 backdrop-blur-md border-b-2 border-stone-900 shadow-[0_4px_0_rgba(28,25,23,0.08)] transition-all">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 bg-[#FFFDF7]/95 backdrop-blur-md border-b-2 border-stone-900 shadow-[0_4px_0_rgba(28,25,23,0.08)] header-smart-nav ${
+        isVisible ? 'header-visible' : 'header-hidden'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4 lg:gap-8">
         {/* Zone 1: Brand wordmark with clean responsive layout */}
         <button
@@ -149,8 +221,8 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             className="hidden sm:inline-flex cartoon-btn-whatsapp px-3.5 sm:px-4 py-2 text-xs lg:text-sm shadow-[0_3px_0_#1c1917]"
           >
-            <MessageSquare className="w-4 h-4" />
-            <span>{t.nav.enquireWhatsApp}</span>
+            <WhatsAppIcon className="w-4 h-4 shrink-0" />
+            <span>{t.productsSection.orderNow}</span>
           </button>
 
           {/* Quick Config / FSSAI button - Visible on desktop/tablet to keep mobile spacious */}
@@ -262,8 +334,8 @@ export const Header: React.FC<HeaderProps> = ({
               }}
               className="w-full py-2.5 cartoon-btn-whatsapp text-xs font-black shadow-[0_3px_0_#1c1917] flex items-center justify-center gap-2"
             >
-              <MessageSquare className="w-4 h-4" />
-              <span>{t.nav.enquireWhatsApp}</span>
+              <WhatsAppIcon className="w-4 h-4 shrink-0" />
+              <span>{t.productsSection.orderNow}</span>
             </button>
           </div>
         </div>

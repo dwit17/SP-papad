@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Language, EnquiryItem, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { PRODUCTS } from '../data/products';
-import { X, Trash2, Plus, Minus, MessageSquare, ShoppingBag, Sparkles } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, Sparkles } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { sound } from '../utils/audioSynth';
 
 interface EnquiryDrawerProps {
@@ -14,6 +15,7 @@ interface EnquiryDrawerProps {
   onClearAll: () => void;
   currentLang: Language;
   storeConfig: StoreConfig;
+  onNavigate?: (tab: string) => void;
 }
 
 export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
@@ -25,6 +27,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
   onClearAll,
   currentLang,
   storeConfig,
+  onNavigate,
 }) => {
   const [orderType, setOrderType] = useState<'retail' | 'wholesale'>('retail');
   const [city, setCity] = useState('');
@@ -291,6 +294,25 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
 
           {/* Footer CTA with Safe Area Handling */}
           <div className="p-4 sm:p-5 border-t-2 border-stone-900 bg-white space-y-2 pb-[max(1.25rem,env(safe-area-inset-bottom,1.25rem))]">
+            {onNavigate && (
+              <button
+                onClick={() => {
+                  sound.playPop();
+                  onClose();
+                  onNavigate('checkout');
+                }}
+                disabled={items.length === 0}
+                className={`w-full py-3 px-4 font-black text-xs sm:text-sm rounded-xl border-2 border-stone-900 transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                  items.length > 0
+                    ? 'bg-amber-400 hover:bg-amber-300 text-stone-900 shadow-[0_3px_0_#1c1917]'
+                    : 'bg-stone-100 text-stone-400 border-stone-200 cursor-not-allowed'
+                }`}
+              >
+                <span>Calculate Courier & Checkout</span>
+                <span className="text-xs">→</span>
+              </button>
+            )}
+
             <button
               onClick={handleSendWhatsApp}
               disabled={items.length === 0}
@@ -300,7 +322,7 @@ export const EnquiryDrawer: React.FC<EnquiryDrawerProps> = ({
                   : 'bg-stone-200 text-stone-400 rounded-xl border-2 border-stone-300 cursor-not-allowed'
               }`}
             >
-              <MessageSquare className="w-5 h-5" />
+              <WhatsAppIcon className="w-5 h-5" />
               <span>{t.basket.sendEnquiryWhatsApp}</span>
             </button>
             <p className="text-[11px] font-bold text-stone-500 text-center">

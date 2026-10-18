@@ -3,7 +3,8 @@ import { Language, ProductCategory, ProductItem, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { PRODUCTS } from '../data/products';
 import { PapadVisual } from '../components/PapadVisual';
-import { MessageSquare, Plus, Check, Flame, ChefHat } from 'lucide-react';
+import { Plus, Check, Flame, ChefHat } from 'lucide-react';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 import { sound } from '../utils/audioSynth';
 
 interface ProductsViewProps {
@@ -185,10 +186,10 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
                       sound.playCrunch();
                       onOpenWhatsAppDirect(`${product.name[currentLang]} (${currentPack})`);
                     }}
-                    className="cartoon-btn-whatsapp py-2.5 px-2 text-xs font-black shadow-[0_3px_0_#1c1917]"
+                    className="cartoon-btn-whatsapp py-2.5 px-3 text-xs font-black shadow-[0_3px_0_#1c1917] flex items-center justify-center gap-1.5"
                   >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>{t.nav.enquireWhatsApp}</span>
+                    <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                    <span>{t.productsSection.orderNow}</span>
                   </button>
                 </div>
               </div>

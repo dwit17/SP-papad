@@ -27,6 +27,7 @@ export interface Translations {
     categoryKhichiya: string;
     selectPack: string;
     enquireNow: string;
+    orderNow: string;
     addToEnquiry: string;
     addedToEnquiry: string;
     bestSellerBadge: string;
@@ -126,13 +127,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       products: 'Products',
       about: 'About',
       contact: 'Contact',
-      enquireWhatsApp: 'Enquire on WhatsApp',
+      enquireWhatsApp: 'Order now',
       basket: 'Enquiry List',
     },
     hero: {
       title: 'Gujarati Papad in Rajkot, Ahmedabad & Gujarat',
       ctaProducts: 'View Products',
-      ctaWhatsApp: 'Enquire on WhatsApp',
+      ctaWhatsApp: 'Order now',
       highlightPurity: '100% Pure Moong & Udad Dal',
       highlightSunDried: 'Natural Sun-Drying Process',
       highlightDelivery: 'Fast Delivery Across India',
@@ -146,7 +147,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       categorySpeciality: 'Garlic & Masala',
       categoryKhichiya: 'Rice Khichiya',
       selectPack: 'Pack Size',
-      enquireNow: 'Enquire on WhatsApp',
+      enquireNow: 'Order Now',
+      orderNow: 'Order now',
       addToEnquiry: 'Add to Enquiry',
       addedToEnquiry: 'Added',
       bestSellerBadge: 'Popular Choice',
@@ -205,7 +207,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         },
         {
           question: 'How do I place an order?',
-          answer: 'Tap "Enquire on WhatsApp" on any product or use our Enquiry List to send your item requirements, quantities, and delivery city directly to our WhatsApp.',
+          answer: 'Tap "Order now" on any product or use our Enquiry List to send your item requirements, quantities, and delivery city directly to our WhatsApp.',
         },
       ],
     },
@@ -269,13 +271,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       products: 'પ્રોડક્ટ્સ',
       about: 'અમારા વિશે',
       contact: 'સંપર્ક',
-      enquireWhatsApp: 'વોટ્સએપ પૂછપરછ',
+      enquireWhatsApp: 'ઓર્ડર કરો',
       basket: 'પૂછપરછ લિસ્ટ',
     },
     hero: {
       title: 'રાજકોટ, અમદાવાદ અને સમગ્ર ગુજરાતમાં અસલી સ્વાદિષ્ટ પાપડ',
       ctaProducts: 'પ્રોડક્ટ્સ જુઓ',
-      ctaWhatsApp: 'વોટ્સએપ પર પૂછપરછ કરો',
+      ctaWhatsApp: 'હમણાં ઓર્ડર કરો',
       highlightPurity: '૧૦૦% શુદ્ધ મગ અને અડદ દાળ',
       highlightSunDried: 'કુદરતી સૂર્યપ્રકાશમાં સુકવેલા',
       highlightDelivery: 'સમગ્ર ભારતમાં ઝડપી ડિલિવરી',
@@ -289,7 +291,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       categorySpeciality: 'લસણીયા અને મસાલા',
       categoryKhichiya: 'ચોખાના ખીચિયા',
       selectPack: 'પેક સાઈઝ',
-      enquireNow: 'વોટ્સએપ પૂછપરછ',
+      enquireNow: 'ઓર્ડર કરો',
+      orderNow: 'ઓર્ડર કરો',
       addToEnquiry: 'લિસ્ટમાં ઉમેરો',
       addedToEnquiry: 'ઉમેરાઈ ગયું',
       bestSellerBadge: 'લોકપ્રિય પસંદગી',
@@ -412,13 +415,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       products: 'उत्पाद',
       about: 'हमारे बारे में',
       contact: 'संपर्क',
-      enquireWhatsApp: 'व्हाट्सएप पूछताछ',
+      enquireWhatsApp: 'ऑर्डर करें',
       basket: 'पूछताछ सूची',
     },
     hero: {
       title: 'राजकोट, अहमदाबाद और संपूर्ण गुजरात का प्रामाणिक पापड़',
       ctaProducts: 'उत्पाद देखें',
-      ctaWhatsApp: 'व्हाट्सएप पर पूछताछ करें',
+      ctaWhatsApp: 'अभी ऑर्डर करें',
       highlightPurity: '१००% शुद्ध मूंग और उड़द दाल',
       highlightSunDried: 'प्राकृतिक धूप में सुखाए गए',
       highlightDelivery: 'अखिल भारतीय त्वरित डिलीवरी',
@@ -432,7 +435,8 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       categorySpeciality: 'लहसुन व मसाला',
       categoryKhichiya: 'चावल खीचिया',
       selectPack: 'पैक साइज',
-      enquireNow: 'व्हाट्सएप पूछताछ',
+      enquireNow: 'ऑर्डर करें',
+      orderNow: 'ऑर्डर करें',
       addToEnquiry: 'सूची में जोड़ें',
       addedToEnquiry: 'जुड़ गया',
       bestSellerBadge: 'सबसे लोकप्रिय',
