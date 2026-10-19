@@ -1,7 +1,7 @@
 import React from 'react';
 import { Language, StoreConfig } from '../types';
 import { TRANSLATIONS } from '../data/translations';
-import { MapPin, ShieldCheck, Globe } from 'lucide-react';
+import { MapPin, ShieldCheck } from 'lucide-react';
 import { WhatsAppIcon } from './WhatsAppIcon';
 import { sound } from '../utils/audioSynth';
 import { PapadNinjaGame } from './PapadNinjaGame';
@@ -154,19 +154,6 @@ export const Footer: React.FC<FooterProps> = ({
                     </button>
                   ))}
                 </div>
-              </div>
-
-              <div className="pt-0.5">
-                <button
-                  onClick={() => {
-                    sound.playPop();
-                    onOpenSeoModal();
-                  }}
-                  className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs text-stone-600 hover:text-amber-700 transition-colors cursor-pointer font-bold"
-                >
-                  <Globe className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                  <span>{t.footer.seoToolsLink}</span>
-                </button>
               </div>
             </div>
 

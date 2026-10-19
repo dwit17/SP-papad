@@ -4,6 +4,7 @@ import { sound } from '../utils/audioSynth';
 export interface PapadCrunchProps {
   speed?: number;
   sound?: boolean;
+  soundType?: 'cartoon' | 'realistic';
   className?: string;
   onBite?: (biteIndex: number, remainingBites: number) => void;
   onCycleComplete?: () => void;
@@ -24,6 +25,7 @@ interface CrumbParticle {
 export const PapadCrunch: React.FC<PapadCrunchProps> = ({
   speed = 1.0,
   sound: initialSound = true,
+  soundType = 'cartoon',
   className = '',
   onBite,
   onCycleComplete,
@@ -88,6 +90,9 @@ export const PapadCrunch: React.FC<PapadCrunchProps> = ({
 
   const soundRef = useRef(initialSound);
   soundRef.current = initialSound;
+
+  const soundTypeRef = useRef(soundType);
+  soundTypeRef.current = soundType;
 
   // 9 Progressive natural bites: Gradual shrinking with uneven, organic fractures
   // The final bite (bite 8) is a small, delicate crispy morsel, NOT a huge chunk!
@@ -621,9 +626,9 @@ export const PapadCrunch: React.FC<PapadCrunchProps> = ({
           s.hand.holdingPiece = true;
         }
 
-        // Real satisfying Papad ASMR Crunch
+        // Real satisfying Cartoon / ASMR Papad Crunch
         if (soundRef.current) {
-          sound.playBiteCrunch(isFinal, s.biteCount);
+          sound.playBiteCrunch(isFinal, s.biteCount, soundTypeRef.current);
         }
 
         // Tactile snap shake

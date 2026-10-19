@@ -70,25 +70,37 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Playful Cartoon Badges */}
               <div className="flex flex-wrap items-center gap-2 pt-0.5">
-                <span className="cartoon-badge bg-amber-100 text-stone-900 text-[11px] sm:text-xs">
+                <button
+                  type="button"
+                  onClick={() => sound.playCartoonCrunch(false, 0)}
+                  className="cartoon-badge bg-amber-100 text-stone-900 text-[11px] sm:text-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                >
                   <Sun className="w-3.5 h-3.5 text-amber-600" />
                   {t.hero.highlightSunDried}
-                </span>
-                <span className="cartoon-badge bg-rose-100 text-stone-900 text-[11px] sm:text-xs">
+                </button>
+                <button
+                  type="button"
+                  onClick={() => sound.playCartoonCrunch(false, 1)}
+                  className="cartoon-badge bg-rose-100 text-stone-900 text-[11px] sm:text-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                >
                   <Heart className="w-3.5 h-3.5 text-rose-600" />
                   {t.hero.highlightPurity}
-                </span>
-                <span className="cartoon-badge bg-emerald-100 text-stone-900 text-[11px] sm:text-xs">
+                </button>
+                <button
+                  type="button"
+                  onClick={() => sound.playCartoonCrunch(false, 2)}
+                  className="cartoon-badge bg-emerald-100 text-stone-900 text-[11px] sm:text-xs hover:scale-105 active:scale-95 transition-transform cursor-pointer"
+                >
                   <Truck className="w-3.5 h-3.5 text-emerald-600" />
                   {t.hero.highlightDelivery}
-                </span>
+                </button>
               </div>
 
               {/* Two Direct Action Buttons with Chunky 3D Cartoon Styling */}
               <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
                 <button
                   onClick={() => {
-                    sound.playPop();
+                    sound.playCartoonCrunch(false, 0);
                     onNavigate('products');
                   }}
                   className="cartoon-btn-primary px-5 sm:px-7 py-3 sm:py-4 text-xs sm:text-base font-black shadow-[0_4px_0_#1c1917] sm:shadow-[0_5px_0_#1c1917] min-h-[44px]"
@@ -99,7 +111,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
                 <button
                   onClick={() => {
-                    sound.playCrunch();
+                    sound.playCartoonCrunch(true, 1);
                     onOpenWhatsAppDirect();
                   }}
                   className="cartoon-btn-whatsapp px-5 sm:px-7 py-3 sm:py-4 text-xs sm:text-base font-black shadow-[0_4px_0_#1c1917] sm:shadow-[0_5px_0_#1c1917] min-h-[44px]"
@@ -111,9 +123,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
             </div>
 
-            {/* Right Column: Realistic Papad Cracked & Eaten Animation */}
+            {/* Right Column: Realistic Papad Cracked & Eaten Animation with Cartoon Crunch */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
-              <PapadCrunch speed={1.0} sound={true} />
+              <PapadCrunch speed={1.0} sound={true} soundType="cartoon" />
             </div>
           </div>
         </div>
@@ -237,13 +249,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* SECTION 3: QUALITY & PROCESS (Unique 3D Showcase with thiings.co icons) */}
       <section className="section-viewport bg-[#FFFDF7] border-b-2 border-stone-900 content-auto py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center space-y-5 sm:space-y-7">
-          {/* Section Header with Authentic Craft Badge */}
+          {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-2 border-stone-900/10 pb-3 sm:pb-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 border border-stone-900 text-stone-900 text-[11px] font-black uppercase tracking-wider mb-2 shadow-[0_2px_0_#1c1917]">
-                <span>✨</span>
-                <span>{currentLang === 'gu' ? 'અસલી પરંપરાગત બનાવટ' : currentLang === 'hi' ? 'प्रामाणिक पारंपरिक निर्माण' : 'Authentic 4-Step Craftsmanship'}</span>
-              </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-stone-900">
                 {t.qualitySection.title}
               </h2>
@@ -262,49 +270,37 @@ export const HomeView: React.FC<HomeViewProps> = ({
             {[
               {
                 num: '01',
-                stepLabel: 'STEP 01',
                 title: t.qualitySection.fact1Title,
                 desc: t.qualitySection.fact1Desc,
                 iconSrc: '/icons/thiings/wheat.png',
                 iconAlt: 'Pure Desi Dal - 3D Wheat & Grains from thiings.co',
-                tag: currentLang === 'gu' ? '૧૦૦% શુદ્ધ દાળ' : currentLang === 'hi' ? '१००% शुद्ध दाल' : '100% Pure Pulses',
-                badgeBg: 'bg-amber-100 text-amber-900 border-amber-300',
                 pedestalBg: 'bg-gradient-to-b from-amber-100 to-amber-200/60',
                 cardAccent: 'hover:border-amber-500',
               },
               {
                 num: '02',
-                stepLabel: 'STEP 02',
                 title: t.qualitySection.fact2Title,
                 desc: t.qualitySection.fact2Desc,
                 iconSrc: '/icons/thiings/rolling-pin.png',
                 iconAlt: 'Authentic Hand-Rolled Dough - 3D Rolling Pin from thiings.co',
-                tag: currentLang === 'gu' ? 'હાથવણાટ કણક' : currentLang === 'hi' ? 'हाथ से बेला गया' : 'Hand-Rolled Dough',
-                badgeBg: 'bg-orange-100 text-orange-900 border-orange-300',
                 pedestalBg: 'bg-gradient-to-b from-orange-100 to-orange-200/60',
                 cardAccent: 'hover:border-orange-500',
               },
               {
                 num: '03',
-                stepLabel: 'STEP 03',
                 title: t.qualitySection.fact3Title,
                 desc: t.qualitySection.fact3Desc,
                 iconSrc: '/icons/thiings/sun.png',
                 iconAlt: 'Gujarat Sun-Drying - 3D Radiant Sun from thiings.co',
-                tag: currentLang === 'gu' ? 'કુદરતી સૂર્યપ્રકાશ' : currentLang === 'hi' ? 'प्राकृतिक धूप' : 'Natural Sun Cured',
-                badgeBg: 'bg-yellow-100 text-yellow-900 border-yellow-300',
                 pedestalBg: 'bg-gradient-to-b from-yellow-100 to-yellow-200/60',
                 cardAccent: 'hover:border-yellow-500',
               },
               {
                 num: '04',
-                stepLabel: 'STEP 04',
                 title: t.qualitySection.fact4Title,
                 desc: t.qualitySection.fact4Desc,
                 iconSrc: '/icons/thiings/verified-shield.png',
                 iconAlt: 'Hygienic Moisture-Lock - 3D Verified Shield from thiings.co',
-                tag: currentLang === 'gu' ? '૧૨ મહિના ફ્રેશ' : currentLang === 'hi' ? '१२ महीने ताज़ा' : '12-Month Crunch',
-                badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-300',
                 pedestalBg: 'bg-gradient-to-b from-emerald-100 to-emerald-200/60',
                 cardAccent: 'hover:border-emerald-500',
               },
@@ -312,19 +308,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div
                 key={fact.num}
                 onClick={() => sound.playPop()}
-                className={`group cartoon-card p-4 sm:p-5 bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_0_#1c1917] cursor-pointer ${fact.cardAccent}`}
+                className={`group cartoon-card p-4 sm:p-5 bg-white flex flex-col justify-center items-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_0_#1c1917] cursor-pointer ${fact.cardAccent}`}
               >
-                <div>
-                  {/* Top Row: Step Tag & Category Pill */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-[10px] font-black tracking-wider text-stone-900 bg-stone-100 px-2 py-0.5 rounded-md border border-stone-900 shadow-[0_1.5px_0_#1c1917]">
-                      {fact.stepLabel}
-                    </span>
-                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${fact.badgeBg}`}>
-                      {fact.tag}
-                    </span>
-                  </div>
-
+                <div className="w-full flex flex-col items-center">
                   {/* Heroic 3D Icon Floating Pedestal (thiings.co 3D Asset) */}
                   <div className={`w-20 h-20 sm:w-24 sm:h-24 mx-auto my-2 rounded-2xl ${fact.pedestalBg} border-2 border-stone-900 flex items-center justify-center p-2 shadow-[0_3px_0_#1c1917] group-hover:shadow-[0_5px_0_#1c1917] transition-all`}>
                     <img
@@ -345,11 +331,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <p className="text-xs text-stone-600 leading-relaxed font-medium text-center">
                     {fact.desc}
                   </p>
-                </div>
-
-                {/* Subtle Interactive Footer in Card */}
-                <div className="pt-3 mt-3 border-t border-stone-100 flex items-center justify-center text-[10px] font-bold text-stone-400 group-hover:text-stone-700 transition-colors">
-                  <span>Guaranteed Authentic Taste ✦</span>
                 </div>
               </div>
             ))}
@@ -573,14 +554,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <div className="lg:col-span-5 flex flex-col items-center justify-center">
                 <div className="bg-gradient-to-b from-amber-100/90 to-amber-200/50 rounded-2xl sm:rounded-3xl p-3 sm:p-5 border-2 border-stone-900 w-full flex flex-col items-center justify-center relative shadow-[0_4px_0_#1c1917]">
                   {/* Floating badge top-left */}
-                  <div className="absolute -top-3 -left-2 sm:-left-3 bg-amber-300 border-2 border-stone-900 text-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full shadow-[0_2px_0_#1c1917] rotate-[-3deg] flex items-center gap-1">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-800" />
+                  <div className="absolute -top-3 -left-2 sm:-left-3 bg-amber-300 border-2 border-stone-900 text-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full shadow-[0_2px_0_#1c1917] rotate-[-3deg] flex items-center">
                     <span>100% Sun-Dried</span>
                   </div>
 
                   {/* Floating badge bottom-right */}
-                  <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-emerald-500 text-white border-2 border-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full shadow-[0_2px_0_#1c1917] rotate-[2deg] flex items-center gap-1">
-                    <Check className="w-3.5 h-3.5 text-white" />
+                  <div className="absolute -bottom-3 -right-2 sm:-right-3 bg-emerald-500 text-white border-2 border-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full shadow-[0_2px_0_#1c1917] rotate-[2deg] flex items-center">
                     <span>Fresh Kathiyawadi</span>
                   </div>
 
@@ -595,8 +574,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Right Column: Copy & Actions */}
               <div className="lg:col-span-7 flex flex-col justify-center space-y-3 sm:space-y-4 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border-2 border-stone-900 text-stone-900 text-[10px] sm:text-xs font-black shadow-[0_2px_0_#1c1917] self-start">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-amber-100 border-2 border-stone-900 text-stone-900 text-[10px] sm:text-xs font-black shadow-[0_2px_0_#1c1917] self-start">
                   <span>Direct Orders & Trade Inquiries</span>
                 </div>
 
